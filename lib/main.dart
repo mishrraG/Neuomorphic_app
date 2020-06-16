@@ -1,117 +1,380 @@
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:neuomorphicapp/chart.dart';
+import 'package:neuomorphicapp/sidebar/sidebar_layout.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Neuomorphic Design',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: Colors.white.withOpacity(0.9),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Homepage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+final data = [55.0, 90.0, 50.0, 40.0, 35.0, 55.0, 70.0, 100.0];
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(
+                  height: 60,
+                ),
+                Text(
+                  "Hello!",
+                  style: TextStyle(fontSize: 24, color: Colors.black),
+                ),
+                Text(
+                  "Arpit Mishra",
+                  style: TextStyle(
+                    fontSize: 26,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Center(
+                  child: ClayContainer(
+                    height: 300,
+                    width: width * 0.8,
+                    depth: 12,
+                    spread: 12,
+                    borderRadius: 16,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 16.0,
+                            right: 16,
+                            top: 16,
+                          ),
+                          child: Text(
+                            "Total Balance",
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                          ),
+                          child: Text(
+                            "Rs. 42,500",
+                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.black),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Chart(
+                          data: data,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    ClayContainer(
+                      height: 180,
+                      width: width * 0.35,
+                      emboss: true,
+                      borderRadius: 16,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16.0,
+                              right: 16,
+                              top: 16,
+                            ),
+                            child: Text(
+                              "Balance for today",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.black45,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                            ),
+                            child: Text(
+                              "Rs. 3,000.00",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.black45,
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          Container(
+                            margin: const EdgeInsets.only(
+                              bottom: 16,
+                              left: 16,
+                              right: 16,
+                            ),
+                            height: 10,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.black45,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ClayContainer(
+                      height: 180,
+                      width: width * 0.35,
+                      borderRadius: 16,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16.0,
+                              right: 16,
+                              top: 16,
+                            ),
+                            child: Text(
+                              "Unlock the limit of Rs. 2000",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                            ),
+                            child: Text(
+                              "By linking your bank card",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black45,
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 16, right: 16),
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFFF559F),
+                                    Color(0xFFCF5CCF),
+                                    Color(0xFFFF57AC),
+                                    Color(0xFFFF6D91),
+                                    Color(0xFFFF8D7E),
+                                    Color(0xFFB6BAA6),
+                                  ],
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.arrow_forward,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "March 2020",
+                        style: TextStyle(
+                          color: Colors.black45,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      Text(
+                        "-Rs. 30.00",
+                        style: TextStyle(
+                          color: Colors.black45,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Column(
+                  children: <Widget>[
+                    ListTile(
+                      leading: ClayContainer(
+                        width: 40,
+                        height: 40,
+                        borderRadius: 8,
+                        child: ShaderMask(
+                          shaderCallback: (Rect bounds) {
+                            return LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
+                              Color(0xFFFF559F),
+                              Color(0xFFCF5CCF),
+                              Color(0xFFFF57AC),
+                              Color(0xFFFF6D91),
+                              Color(0xFFFF8D7E),
+                              Color(0xFFB6BAA6),
+                            ]).createShader(bounds);
+                          },
+                          blendMode: BlendMode.srcATop,
+                          child: Icon(
+                            Icons.local_pizza,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        "Food Item 1",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "12 March 13:43",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      trailing: Text("-Rs. 10.00",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                          )),
+                    ),
+                    ListTile(
+                      leading: ClayContainer(
+                        width: 40,
+                        height: 40,
+                        borderRadius: 8,
+                        child: ShaderMask(
+                          shaderCallback: (Rect bounds) {
+                            return LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
+                              Color(0xFFFF559F),
+                              Color(0xFFCF5CCF),
+                              Color(0xFFFF57AC),
+                              Color(0xFFFF6D91),
+                              Color(0xFFFF8D7E),
+                              Color(0xFFB6BAA6),
+                            ]).createShader(bounds);
+                          },
+                          blendMode: BlendMode.srcATop,
+                          child: Icon(
+                            Icons.local_pizza,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        "Food Item 2",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "12 March 13:43",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      trailing: Text("- Rs. 10.00",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                          )),
+                    ),
+                    ListTile(
+                      leading: ClayContainer(
+                        width: 40,
+                        height: 40,
+                        borderRadius: 8,
+                        child: ShaderMask(
+                          shaderCallback: (Rect bounds) {
+                            return LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
+                              Color(0xFFFF559F),
+                              Color(0xFFCF5CCF),
+                              Color(0xFFFF57AC),
+                              Color(0xFFFF6D91),
+                              Color(0xFFFF8D7E),
+                              Color(0xFFB6BAA6),
+                            ]).createShader(bounds);
+                          },
+                          blendMode: BlendMode.srcATop,
+                          child: Icon(
+                            Icons.local_pizza,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        "Food Item 3",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "12 March 13:43",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      trailing: Text("-Rs. 10.00",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                          )),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      endDrawer: SidebarLayout(),
     );
   }
 }
