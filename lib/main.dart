@@ -197,12 +197,8 @@ class Homepage extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 gradient: LinearGradient(
                                   colors: [
-                                    Color(0xFFFF559F),
-                                    Color(0xFFCF5CCF),
-                                    Color(0xFFFF57AC),
-                                    Color(0xFFFF6D91),
-                                    Color(0xFFFF8D7E),
-                                    Color(0xFFB6BAA6),
+                                    Color(0xFFED4264),
+                                    Color(0xFFFFEDBC),
                                   ],
                                 ),
                               ),
